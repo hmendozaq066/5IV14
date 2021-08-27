@@ -29,6 +29,12 @@ namespace Clase01
             Console.Write("Escribe tu apellido paterno: ");
             persona.ApellidoPaterno = Console.ReadLine();
 
+            Console.Write("Escribe tu apellido materno: ");
+            persona.ApellidoMaterno = Console.ReadLine();
+
+            Console.Write("Escribe tu Nombre: ");
+            persona.Nombre = Console.ReadLine();
+
             Console.WriteLine(persona.ObtenerCURP());
 
             //Console.WriteLine("Tu edad es: " + persona.CalcularEdad());
