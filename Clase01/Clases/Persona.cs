@@ -76,6 +76,8 @@ namespace Clase01.Clases
             return Nombre.Substring(0, 1).ToUpper();
         }
 
+        //Nuevo cambio a las 08:15 PM
+
         private bool EsCompuesto(string cadena)
         {
             if (cadena.IndexOf(" ") > -1) return true;
