@@ -35,6 +35,13 @@ namespace Clase01
             Console.Write("Escribe tu Nombre: ");
             persona.Nombre = Console.ReadLine();
 
+            Console.Write("Fecha de nacimiento: ");
+            var respuesta_fecha = Console.ReadLine();
+            persona.FechaNacimiento = DateTime.Parse(respuesta_fecha);
+
+            Console.Write("Escribe tu género [Hombre/Mujer]: ");
+            persona.Genero = Console.ReadLine();
+
             Console.WriteLine(persona.ObtenerCURP());
 
             //Console.WriteLine("Tu edad es: " + persona.CalcularEdad());

@@ -16,7 +16,7 @@ namespace Clase01.Clases
         /* get es para leer
          * set es para escribir / establecer
          * */
-        //Atributos
+        //Atributos // Propiedades
         public string Nombre { get; set; }
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
@@ -46,18 +46,45 @@ namespace Clase01.Clases
             return Convert.ToInt32(edad.Days / 365);
         }
 
+
+
         public string ObtenerCURP()
         {
-            string curp = ObtenerPrimerasLetras();
+            string curp = ObtenerPrimerasLetras() + ObtenerFechaNacimiento();
             return curp.ToUpper();
             //return ObtenerPrimerVocal(ApellidoPaterno);
+        }
+
+        public string ObtenerFechaNacimiento()
+        {
+            return FechaNacimiento.Year.ToString().Substring(2, 2) +
+                AgregarCero(FechaNacimiento.Month) + AgregarCero(FechaNacimiento.Day);
+        }
+
+        //6/9/1985
+
+        //850906
+        //10/9/2002   2, 2
+        //020910  09 = 9
+
+        private string AgregarCero(int numero)
+        {
+            //if (numero < 10) return "0" + numero; //Conversión implicita
+
+            // Ejemplos de conversiones explicitas
+            // x = (int) y;
+            // x = Convert.ToInt32(y);
+            // x = Int.Parse(y);
+
+            if (numero < 10) return "0" + numero.ToString(); //Conversión explicita -- Es la mejor forma
+            return numero.ToString();
         }
 
         private string ObtenerPrimerasLetras()
         {
             var primerasLetras = PrimeraLetraPaterno(ApellidoPaterno)
                 + ObtenerPrimerVocal(ApellidoPaterno) + ApellidoMaterno.Substring(0, 1) + PrimeraLetraNombre();
-            string[] palabrasAntisonantes = { "BACA", "BAKA", "BUEI", "PEDO" };
+            string[] palabrasAntisonantes = { "BACA", "BAKA", "BUEI", "PEDO", "LOCO" };
 
             for (int i = 0; i < palabrasAntisonantes.Length; i++)
             {
