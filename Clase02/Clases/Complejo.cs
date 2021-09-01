@@ -13,7 +13,7 @@ namespace Clase02.Clases
         public int B { get; set; }
 
         /*
-         * Constructores
+         * Constructores //31/08/2021 Act
          * 
          * En Programación Orientada a Objetos (POO), un constructor es 
          * una subrutina cuya misión es inicializar un objeto de una clase. 
