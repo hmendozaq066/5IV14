@@ -42,6 +42,9 @@ namespace Clase01
             Console.Write("Escribe tu género [Hombre/Mujer]: ");
             persona.Genero = Console.ReadLine();
 
+            Console.Write("Lugar de nacimiento: ");
+            persona.LugarNacimiento = Console.ReadLine();
+
             Console.WriteLine(persona.ObtenerCURP());
 
             //Console.WriteLine("Tu edad es: " + persona.CalcularEdad());

@@ -50,7 +50,10 @@ namespace Clase01.Clases
 
         public string ObtenerCURP()
         {
-            string curp = ObtenerPrimerasLetras() + ObtenerFechaNacimiento();
+            Random aleatorio = new Random(DateTime.Now.Millisecond);
+            string curp = ObtenerPrimerasLetras() + ObtenerFechaNacimiento() + Genero.Substring(0, 1)
+                + ObtenerInicialesEstadoSwitch() + ObtenerConsonanteInterna(ApellidoPaterno) + ObtenerConsonanteInterna(ApellidoMaterno) +
+                ObtenerConsonanteInterna(Nombre) + aleatorio.Next(10, 99);
             return curp.ToUpper();
             //return ObtenerPrimerVocal(ApellidoPaterno);
         }
@@ -59,6 +62,48 @@ namespace Clase01.Clases
         {
             return FechaNacimiento.Year.ToString().Substring(2, 2) +
                 AgregarCero(FechaNacimiento.Month) + AgregarCero(FechaNacimiento.Day);
+        }
+
+        
+
+        private string ObtenerInicialesEstadoSwitch()
+        {
+            switch (LugarNacimiento.ToUpper().Trim())
+            {
+                case "AGUASCALIENTES":
+                    return "AS";
+                case "BAJA CALIFORNIA":
+                    return "BC";
+                case "MÉXICO":
+                case "MEXICO":
+                    return "MC";
+                case "DISTRITO FEDERAL":
+                case "CIUDAD DE MEXICO":
+                case "CDMX":
+                    return "DF";
+                case "OAXACA":
+                    return "OC";
+                default:
+                    return "NE";
+            }
+        }
+
+        //MENDOZA           -- N
+        //QUIROZ            -- R
+        //HECTOR MANUEL     -- C
+
+        //CUE               -- X
+
+        private string ObtenerConsonanteInterna(string cadena)
+        {
+            for (int i = 1; i < cadena.Length; i++)
+            {
+                if(EsVolcal(cadena.Substring(i, 1)) == false)
+                {
+                    return cadena.Substring(i, 1);
+                }
+            }
+            return "X";
         }
 
         //6/9/1985
@@ -138,12 +183,28 @@ namespace Clase01.Clases
             return false;
         }
 
+        /// <summary>
+        /// Devuelve la primera letra del apellido paterno
+        /// </summary>
+        /// <param name="cadena">Apellido paterno</param>
+        /// <returns>la primera letra del apellido paterno</returns>
         private string PrimeraLetraPaterno(string cadena)
         {
-            cadena = cadena.ToUpper();
+            //cadena = cadena.ToUpper();
             //Verificamos que si la primera letra es Ñ entonces se cambia por X
-            if (cadena.Substring(0, 1) == "Ñ") return "X";
-            return cadena.Substring(0, 1).ToUpper();
+            //if (cadena.Substring(0, 1) == "Ñ") return "X";
+            return ConvertirEnhe(cadena.Substring(0, 1).ToUpper());
+        }
+
+        /// <summary>
+        /// Convierte una Ñ en una X
+        /// </summary>
+        /// <param name="letra">Letra a evaluar</param>
+        /// <returns>X si es Ñ de lo contrario la misma letra</returns>
+        private string ConvertirEnhe(string letra)
+        {
+            if (letra.ToUpper() == "Ñ") return "X";
+            return letra;
         }
 
         private string ObtenerPrimerVocal(string cadena)
