@@ -28,6 +28,7 @@ namespace Clase02.Clases
         //2- Se llama igual que la clase
         public Complejo(int A, int b)
         {
+            //Cuando utilizar this: Si una propiedad se llama igual que una variable local
             /*
              * this - The this pointer represents the current instance of a class or struct
              */
