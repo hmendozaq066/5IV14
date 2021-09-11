@@ -79,6 +79,54 @@ namespace Clase02.Clases
             return resultado;
         }
 
+        /// <summary>
+        /// Esta es una sobrecarga del método suma de la clase complejo, en este se recibe una instancia del tipo Complejo
+        /// </summary>
+        /// <param name="complejo">Instancia del tipo Complejo</param>
+        /// <returns>Una instancia del tipo Complejo con la suma de estos</returns>
+        public Complejo Suma(Complejo complejo)
+        {
+            var resultado = new Complejo();
+            //Aquí estamos sumando la propiedad A de la instancia actual con la propiedad A de la instancia que se llama 'complejo'
+            resultado.A = A + complejo.A;
+            //Aquí estamos sumando la propiedad B de la instancia actual con la propiedad B de la instancia que se llama 'complejo'
+            resultado.B = B + complejo.B;
+            return resultado;
+        }
+
+        //La multiplicación de dos complejos
+        //La multiplicación de un entero con un complejo
+
+        //El valor absoluto de un numero complejo a^2 = b^2 + c^2  --> a = raiz(b^2 + c^2) 
+        //el valor absoluto de un número complejo es un entero positivo
+
+        //public int ValorAbsoluto()
+
+        //public Complejo Multiplicar(int real)
+        //public Complejo Multiplicar(Complejo complejo)
+
+        /// <summary>
+        /// Resta de un número complejo
+        /// </summary>
+        /// <param name="complejo">Número complejo a restar</param>
+        /// <returns>La instancia del resultado de la resta de un complejo</returns>
+        public Complejo Resta(Complejo complejo)
+        {
+            var resultado = new Complejo();
+            resultado.A = this.A - complejo.A;
+            resultado.B = this.B - complejo.B;
+            return resultado;
+        }
+
+        public Complejo Resta(int Real, int Imaginario)
+        {
+            var resultado = new Complejo();
+            //Aquí no usamos this porque las propiedas no tienen el mismo nombre que las variables locales o los argumentos.
+            resultado.A = A - Real;
+            resultado.B = B - Imaginario;
+            return resultado;
+        }
+
         //Implementar la resta de numeros complejos
         //public Complejo Resta(int Real, int Imaginaria)
 
@@ -95,9 +143,21 @@ namespace Clase02.Clases
          */
 
         public string FormaBinomica()
-        {
+        {            
+            if (B < 0)
+            {
+                //BP Cuando exista un return dentro de una condición IF no es necesario el else
+                //Si tiene mas lineas son necesarias las llaves
+                return string.Format("{0} - {1}i", A, Math.Abs(B));
+            }
             return string.Format("{0} + {1}i", A, B);
-            //return A + " + " + B + "i";
+        }
+
+        public string FormaBinomicaTernaria()
+        {
+            return string.Format("{0} {1} {2}i", A, (B < 0) ? "-" : "+", Math.Abs(B));
+            //La sintaxis del operador ternario es (condicion) ? true : false;
+
         }
 
     }
