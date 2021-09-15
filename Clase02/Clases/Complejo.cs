@@ -127,6 +127,30 @@ namespace Clase02.Clases
             return resultado;
         }
 
+        public double ValorAbsoluto()
+        {
+            return Math.Sqrt(Math.Pow(A, 2) + Math.Pow(B, 2));
+        }
+
+        public Complejo MultiplicarComplejos(Complejo numero)
+        {
+            var respuesta = new Complejo();
+
+            respuesta.A = (A * numero.A) + (-1 * (this.B * numero.B));
+            respuesta.B = (A * numero.B) + (B * numero.A);
+
+            return respuesta;
+        }
+
+        public Complejo MultiplicarPorReal(int real)
+        {
+            var respuesta = new Complejo();
+            respuesta.A = A * real;
+            respuesta.B = B * real;
+            return respuesta;
+        }
+
+
         //Implementar la resta de numeros complejos
         //public Complejo Resta(int Real, int Imaginaria)
 

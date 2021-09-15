@@ -13,9 +13,13 @@ namespace Clase02
         static void Main(string[] args)
         {
             /* Vamos a realizar una instancia de la clase complejo */
-            var complejo01 = new Complejo(12, 5);
-            var complejo02 = new Complejo(15, 8);
+            var complejo01 = new Complejo(1, 2);
+            var complejo02 = new Complejo(3, 1);
 
+            var multi = complejo01.MultiplicarComplejos(complejo02);
+            Console.WriteLine(multi.FormaBinomica());
+
+            /*
             Console.WriteLine(complejo01.FormaBinomica());
             //Aquí estamos declarando que la instancia temporal que devuelve suma
             //Se guarda en la 'variable' que se llama "res"
@@ -26,7 +30,7 @@ namespace Clase02
             Console.WriteLine("Complejo01: " + complejo01.FormaBinomica());
 
             Console.WriteLine("Resultado 2: " + res02.FormaBinomicaTernaria());
-            Console.WriteLine("Resultado 2: " + res02.FormaBinomica());
+            Console.WriteLine("Resultado 2: " + res02.FormaBinomica());*/
 
             Console.ReadKey();
         }
