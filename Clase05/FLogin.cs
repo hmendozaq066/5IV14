@@ -32,5 +32,15 @@ namespace Clase05
             fRegistro.StartPosition = FormStartPosition.CenterScreen;
             fRegistro.ShowDialog(); //ShowDialog muestra el formulario, pero no puedes ver en formulario que lo ejecutó
         }
+
+        private void pictureBox2_MouseHover(object sender, EventArgs e)
+        {
+            txtContrasena.PasswordChar = '\0';
+        }
+
+        private void pictureBox2_MouseLeave(object sender, EventArgs e)
+        {
+            txtContrasena.PasswordChar = '*';
+        }
     }
 }

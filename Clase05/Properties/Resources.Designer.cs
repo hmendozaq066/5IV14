@@ -73,6 +73,16 @@ namespace Clase05.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap eye_1 {
+            get {
+                object obj = ResourceManager.GetObject("eye-1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ojito {
             get {
                 object obj = ResourceManager.GetObject("ojito", resourceCulture);
