@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Clase05.Clases;
 
 namespace Clase05
 {
@@ -62,13 +63,27 @@ namespace Clase05
 
         private void btnRegistrarme_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtContrasena.Text))
-            {
-                MessageBox.Show("La contraseña es obligatoria", "CLASE05", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
             if(chkMostrarContrasena.Checked == false && txtContrasena.Text != txtRepetirContrasena.Text)
             {
                 MessageBox.Show("Las contraseñas no coinciden", "CLASE05", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                var usuario = new Usuario();
+                usuario.NombreUsuario = txtNombreUsuario.Text;
+                usuario.Contrasena = txtContrasena.Text;
+                usuario.CorreoElectronico = txtCorreo.Text;
+                usuario.Telefono = txtTelefono.Text;
+                usuario.FechaNacimiento = dtFechaNacimiento.Value;
+                usuario.Genero = cbGenero.Text;
+                usuario.Semestre = Convert.ToInt32(nSemestre.Value);
+
+                if(usuario.Validar() == false)
+                {
+                    var errores = string.Join(Environment.NewLine, usuario.GetErrores());
+                    MessageBox.Show("El se registro no se pudo completar por: " + Environment.NewLine + Environment.NewLine + errores, "CLASE05");
+                }
+
             }
         }
     }

@@ -39,7 +39,7 @@ namespace Clase05
             this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtCorreoElectronico = new System.Windows.Forms.TextBox();
+            this.txtCorreo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chkMostrarContrasena = new System.Windows.Forms.CheckBox();
@@ -47,7 +47,7 @@ namespace Clase05
             this.label3 = new System.Windows.Forms.Label();
             this.txtContrasena = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNombreUsuario = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnRegistrarme = new System.Windows.Forms.Button();
@@ -66,7 +66,7 @@ namespace Clase05
             this.groupBox1.Controls.Add(this.dtFechaNacimiento);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtCorreoElectronico);
+            this.groupBox1.Controls.Add(this.txtCorreo);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Location = new System.Drawing.Point(18, 244);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -171,12 +171,12 @@ namespace Clase05
             this.label5.TabIndex = 2;
             this.label5.Text = "Teléfono:";
             // 
-            // txtCorreoElectronico
+            // txtCorreo
             // 
-            this.txtCorreoElectronico.Location = new System.Drawing.Point(13, 47);
-            this.txtCorreoElectronico.Name = "txtCorreoElectronico";
-            this.txtCorreoElectronico.Size = new System.Drawing.Size(190, 27);
-            this.txtCorreoElectronico.TabIndex = 1;
+            this.txtCorreo.Location = new System.Drawing.Point(13, 47);
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.Size = new System.Drawing.Size(190, 27);
+            this.txtCorreo.TabIndex = 1;
             // 
             // label4
             // 
@@ -195,7 +195,7 @@ namespace Clase05
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.txtContrasena);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.txtNombreUsuario);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Location = new System.Drawing.Point(18, 14);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -253,12 +253,12 @@ namespace Clase05
             this.label2.TabIndex = 0;
             this.label2.Text = "Contraseña:";
             // 
-            // textBox1
+            // txtNombreUsuario
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 48);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(190, 27);
-            this.textBox1.TabIndex = 1;
+            this.txtNombreUsuario.Location = new System.Drawing.Point(13, 48);
+            this.txtNombreUsuario.Name = "txtNombreUsuario";
+            this.txtNombreUsuario.Size = new System.Drawing.Size(190, 27);
+            this.txtNombreUsuario.TabIndex = 1;
             // 
             // label1
             // 
@@ -323,11 +323,11 @@ namespace Clase05
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtContrasena;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNombreUsuario;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkMostrarContrasena;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtCorreoElectronico;
+        private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown nSemestre;
         private System.Windows.Forms.Label label8;
