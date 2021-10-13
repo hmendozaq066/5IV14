@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Clase05.Clases;
 
 namespace Clase05
 {
@@ -19,11 +20,23 @@ namespace Clase05
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-            Hide();//Oculta el formulario actual
-            var fPrincipal = new FPrincipal();
-            fPrincipal.StartPosition = FormStartPosition.CenterScreen;  //Aquí cambiamos propiedades en tiempo de ejecución
-                                                                        //En este caso cambiamos la posición inicial del formulario
-            fPrincipal.Show(); //Show muestra el formulario indicado
+            var usuario = new Usuario();
+            usuario.NombreUsuario = txtUsuario.Text;
+            usuario.Contrasena = txtContrasena.Text;
+
+            if(usuario.ValidarUsuario())
+            {
+                Hide();//Oculta el formulario actual
+                MessageBox.Show("Bienvendo " + txtUsuario.Text);
+                var fPrincipal = new FPrincipal();
+                fPrincipal.StartPosition = FormStartPosition.CenterScreen;  //Aquí cambiamos propiedades en tiempo de ejecución
+                                                                            //En este caso cambiamos la posición inicial del formulario
+                fPrincipal.Show(); //Show muestra el formulario indicado
+            }
+            else
+            {
+                MessageBox.Show("Usuario y/o contraseña incorrecta");
+            }            
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)

@@ -78,7 +78,12 @@ namespace Clase05
                 usuario.Genero = cbGenero.Text;
                 usuario.Semestre = Convert.ToInt32(nSemestre.Value);
 
-                if(usuario.Validar() == false)
+                if(usuario.Validar())
+                {
+                    usuario.Guardar();
+                    MessageBox.Show("Usuario registrado", "CLASE05");
+                }
+                else
                 {
                     var errores = string.Join(Environment.NewLine, usuario.GetErrores());
                     MessageBox.Show("El se registro no se pudo completar por: " + Environment.NewLine + Environment.NewLine + errores, "CLASE05");

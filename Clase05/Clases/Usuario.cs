@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,50 @@ namespace Clase05.Clases
         {
             return Errores;
         }*/
+
+        public string GetLinea() => string.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}", IDUsuario, NombreUsuario, Contrasena, CorreoElectronico, Telefono, FechaNacimiento.ToString(), Genero, Semestre);
+
+        public bool Guardar()
+        {
+            var archivo = new StreamWriter(@".\Contacto.txt", true);
+            archivo.WriteLine(GetLinea());
+            archivo.Close();
+            return true;
+        }
+
+        public bool ValidarUsuario()
+        {
+            var usuarios = CargarUsuarios();
+            foreach(Usuario usuario in usuarios)
+            {
+                if(usuario.NombreUsuario == NombreUsuario && usuario.Contrasena == Contrasena)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public List<Usuario> CargarUsuarios()
+        {
+            var listado = new List<Usuario>();
+            var lector = new StreamReader(@".\Contacto.txt");
+            string ln;
+
+            while ((ln = lector.ReadLine()) != null)
+            {
+                string[] elementos = ln.Split('|');
+
+                var usuario = new Usuario();
+                usuario.IDUsuario = Convert.ToInt32(elementos[0]);
+                usuario.NombreUsuario = elementos[1];
+                usuario.Contrasena = elementos[2];
+                usuario.CorreoElectronico = elementos[3];
+
+                listado.Add(usuario);
+            }
+            return listado;
+        }
 
         public bool Validar()
         {
