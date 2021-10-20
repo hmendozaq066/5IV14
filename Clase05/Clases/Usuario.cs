@@ -61,13 +61,20 @@ namespace Clase05.Clases
                 string[] elementos = ln.Split('|');
 
                 var usuario = new Usuario();
+
                 usuario.IDUsuario = Convert.ToInt32(elementos[0]);
                 usuario.NombreUsuario = elementos[1];
                 usuario.Contrasena = elementos[2];
                 usuario.CorreoElectronico = elementos[3];
 
+                usuario.Telefono = elementos[4];
+                usuario.FechaNacimiento = Convert.ToDateTime(elementos[5]);
+                usuario.Genero = elementos[6];
+                usuario.Semestre = Convert.ToInt32(elementos[7]);
+
                 listado.Add(usuario);
             }
+            lector.Close();
             return listado;
         }
 

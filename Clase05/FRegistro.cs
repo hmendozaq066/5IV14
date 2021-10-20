@@ -82,6 +82,7 @@ namespace Clase05
                 {
                     usuario.Guardar();
                     MessageBox.Show("Usuario registrado", "CLASE05");
+                    Close();
                 }
                 else
                 {
