@@ -92,5 +92,108 @@ namespace Clase06
             //Cuando terminamos cerramos la conexión
             sqlCnn.Close();
         }
+
+        private void btnInsertarConcatenar_Click(object sender, EventArgs e)
+        {
+            //Aquí vamos a insertar un registro a una tabla concatenando una cadena
+            //ESTO NO ES RECOMENDABLE YA QUE ES MUY INSEGURO (HACKEAR)
+            //Primero siempre debemos tener la conexión lista
+            var conexion = new SqlConnection("Data Source=DESKTOP-0HLSANU;Initial Catalog=Prueba02;Integrated Security=True");
+            conexion.Open();
+            //Para insertar, actualizar o borrar se debe utilizar el objeto SQLCommand
+            var query = string.Format("INSERT INTO usuario(nombre, apellidos, correo, ip, genero) VALUES('{0}', '{1}', '{2}', '{3}', '{4}'); ",
+                txtNombre.Text,txtApellidos.Text, txtCorreo.Text, txtIP.Text, txtGenero.Text);
+            txtConsulta.Text = query;
+            var comando = new SqlCommand(query, conexion);
+            //ExecuteNonQuery Ejecuta el query especificado y nos indica el numero de registros insertados/modificados/afectados
+            var resultado = comando.ExecuteNonQuery();
+            if(resultado > 0)
+            {
+                MessageBox.Show("El registro se inserto correctamente");
+            }
+            else
+            {
+                MessageBox.Show("El registro no se pudo insertar");
+            }
+
+        }
+
+        private void btnValidarUsuario_Click(object sender, EventArgs e)
+        {
+            var conexion = new SqlConnection("Data Source=DESKTOP-0HLSANU;Initial Catalog=Prueba02;Integrated Security=True");
+            conexion.Open();
+            var query = string.Format("SELECT * FROM usuario WHERE usuario_id = {0} AND correo = '{1}';", txtID.Text, txtCorreoUsuario.Text);
+            txtConsulta.Text = query;
+
+            var adapter = new SqlDataAdapter(query, conexion);
+            var resultados = new DataTable();
+            adapter.Fill(resultados);
+
+            if(resultados.Rows.Count > 0)
+            {
+                MessageBox.Show("Bienvenido " +  resultados.Rows[0]["nombre"].ToString());
+            }
+            else
+            {
+                MessageBox.Show("Correo y/o ID no válidos ");
+            }
+        }
+
+        private void btnInsertarCorrecto_Click(object sender, EventArgs e)
+        {
+            //Aquí vamos a insertar un registro a una tabla concatenando una cadena
+            //ESTA ES la forma recomendada
+            //Primero siempre debemos tener la conexión lista
+            var conexion = new SqlConnection("Data Source=DESKTOP-0HLSANU;Initial Catalog=Prueba02;Integrated Security=True");
+            conexion.Open();
+            //Para insertar, actualizar o borrar se debe utilizar el objeto SQLCommand
+            //El query para insertar en la parte de VALUES debe llevar el nombre de lo campos con un @ al inicio
+            var query = "INSERT INTO usuario(nombre, apellidos, correo, ip, genero) VALUES(@nombre, @apellidos, @correo, @ip, @genero);";
+            txtConsulta.Text = query;
+            var comando = new SqlCommand(query, conexion);
+            //Debo pasar los parámetros
+
+            comando.Parameters.AddWithValue("@nombre", txtNombre.Text);
+            comando.Parameters.AddWithValue("@apellidos", txtApellidos.Text);
+            comando.Parameters.AddWithValue("@correo", txtCorreo.Text);
+            comando.Parameters.AddWithValue("@ip", txtIP.Text);
+            comando.Parameters.AddWithValue("@genero", txtGenero.Text);
+
+            //ExecuteNonQuery Ejecuta el query especificado y nos indica el numero de registros insertados/modificados/afectados
+            var resultado = comando.ExecuteNonQuery();
+            if (resultado > 0)
+            {
+                MessageBox.Show("El registro se inserto correctamente");
+            }
+            else
+            {
+                MessageBox.Show("El registro no se pudo insertar");
+            }
+        }
+
+        private void btnValidarSeguro_Click(object sender, EventArgs e)
+        {
+            var conexion = new SqlConnection("Data Source=DESKTOP-0HLSANU;Initial Catalog=Prueba02;Integrated Security=True");
+            conexion.Open();
+            var query = "SELECT * FROM usuario WHERE usuario_id = @usuario_id AND correo = @correo;";
+            txtConsulta.Text = query;
+
+            var adapter = new SqlDataAdapter(query, conexion);
+            //Aquí se agregan los parámetros del adapter
+            adapter.SelectCommand.Parameters.AddWithValue("@usuario_id", txtID.Text);
+            adapter.SelectCommand.Parameters.AddWithValue("@correo", txtCorreoUsuario.Text);
+
+            var resultados = new DataTable();
+            adapter.Fill(resultados);
+
+            if (resultados.Rows.Count > 0)
+            {
+                MessageBox.Show("Bienvenido " + resultados.Rows[0]["nombre"].ToString());
+            }
+            else
+            {
+                MessageBox.Show("Correo y/o ID no válidos ");
+            }
+        }
     }
 }
