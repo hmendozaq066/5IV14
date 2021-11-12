@@ -18,6 +18,44 @@ namespace Clase07.Modelos
         public string Genero { get; set; }
         public string IP { get; set; }
 
+        public static DataTable GetUsuarios()
+        {
+            //Primero la consulta
+            string query = "SELECT usuario_id AS ID, Nombre, Apellidos, Correo, genero AS Género, IP FROM usuario;";
+            //2do Obtener el SQLConnection
+            var conexion = DAO.GetSqlConnection();
+            //3ro para la consulta (SELECT) se usa un SqlDataAdapter
+            var adapter = new SqlDataAdapter(query, conexion);
+            //4to Creamos un objeto DatataTable
+            var resultado = new DataTable();
+            //5to LLenamos el DataTable
+            adapter.Fill(resultado);
+            //6to Cerramos la conexión
+            conexion.Close();
+            //Por último devolvemos el resultado
+            return resultado;
+        }
+
+        public static DataTable GetBuscarUsuarios(string criterio, string columna)
+        {
+            //Primero la consulta
+            string query = "SELECT usuario_id AS ID, Nombre, Apellidos, Correo, genero AS Género, IP FROM usuario WHERE " + columna + " LIKE @criterio;";
+            //2do Obtener el SQLConnection
+            var conexion = DAO.GetSqlConnection();
+            //3ro para la consulta (SELECT) se usa un SqlDataAdapter
+            var adapter = new SqlDataAdapter(query, conexion);
+            adapter.SelectCommand.Parameters.AddWithValue("@columna", columna);
+            adapter.SelectCommand.Parameters.AddWithValue("@criterio", "%" + criterio + "%");
+            //4to Creamos un objeto DatataTable
+            var resultado = new DataTable();
+            //5to LLenamos el DataTable
+            adapter.Fill(resultado);
+            //6to Cerramos la conexión
+            conexion.Close();
+            //Por último devolvemos el resultado
+            return resultado;
+        }
+
         public bool Guardar()
         {
             //Al ser GetSqlConnection un método estatico no es necesario realizar la instancia del objeto

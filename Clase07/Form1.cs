@@ -87,5 +87,134 @@ namespace Clase07
             }
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            dgvUsuarios.DataSource = Usuario.GetUsuarios();
+            //dgvUsuarios.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
+        }
+
+        private void dgvUsuarios_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Al momento de dar doble clic en el GridView Se llena el formulario 
+            //que esta a la derecha con los datos seleccionados
+            //MessageBox.Show(dgvUsuarios.SelectedCells[0].Value.ToString());
+            txtID.Text = dgvUsuarios.SelectedCells[0].Value.ToString();
+            txtNombre.Text = dgvUsuarios.SelectedCells[1].Value.ToString();
+            txtApellidos.Text = dgvUsuarios.SelectedCells[2].Value.ToString();
+            txtCorreo.Text = dgvUsuarios.SelectedCells[3].Value.ToString();
+            cbGenero.Text = dgvUsuarios.SelectedCells[4].Value.ToString();
+            txtIP.Text = dgvUsuarios.SelectedCells[5].Value.ToString();
+            btnActualizar01.Enabled = true;
+            btnEliminar03.Enabled = true;
+            txtID.ReadOnly = true;
+            //Con focus se establece el control que tendra el FOCO es decir el activo
+            txtNombre.Focus();
+        }
+
+        private void btnActualizar01_Click(object sender, EventArgs e)
+        {
+            //Actualizar los datos
+            var usuario = new Usuario();
+            usuario.Usuario_id = Convert.ToInt32(txtID.Text);
+            usuario.Nombre = txtNombre.Text;
+            usuario.Apellidos = txtApellidos.Text;
+            usuario.Correo = txtCorreo.Text;
+            usuario.Genero = cbGenero.Text;
+            usuario.IP = txtIP.Text;
+
+            if (usuario.Actualizar())
+            {
+                btnActualizar01.Enabled = false;
+                btnEliminar03.Enabled = false;
+                txtID.Clear();
+                txtNombre.Clear();
+                txtApellidos.Clear();
+                txtCorreo.Clear();
+                txtCriterio.Clear();
+                cbColumna.Text = "";
+                cbGenero.Text = "";
+                txtIP.Clear();
+                dgvUsuarios.DataSource = Usuario.GetUsuarios();
+                MessageBox.Show("Registro actualizado");
+            }
+            else
+            {
+                MessageBox.Show("No se pudo actualizar el registro");
+            }
+
+        }
+
+        private void btnEliminar03_Click(object sender, EventArgs e)
+        {
+            var resultado = MessageBox.Show("¿Deseas eliminar el registro?", "Clase07", MessageBoxButtons.YesNo);
+
+            if(resultado == DialogResult.Yes)
+            {
+                var usuario = new Usuario();
+                usuario.Usuario_id = Convert.ToInt32(txtID.Text);
+
+                if (usuario.Eliminar())
+                {
+                    btnActualizar01.Enabled = false;
+                    btnEliminar03.Enabled = false;
+                    txtID.Clear();
+                    txtNombre.Clear();
+                    txtApellidos.Clear();
+                    txtCorreo.Clear();
+                    txtCriterio.Clear();
+                    cbColumna.Text = "";
+                    cbGenero.Text = "";
+                    txtIP.Clear();
+                    dgvUsuarios.DataSource = Usuario.GetUsuarios();
+                    MessageBox.Show("Usuario eliminado");
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo eliminar el usuario");
+                }
+
+            }
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cbColumna.Text))
+            {
+                dgvUsuarios.DataSource = Usuario.GetBuscarUsuarios(txtCriterio.Text, cbColumna.Text);
+            }
+        }
+
+        private void btnAgregar03_Click(object sender, EventArgs e)
+        {
+            var usuario = new Usuario();
+
+            usuario.Nombre = txtNombre.Text;
+            usuario.Apellidos = txtApellidos.Text;
+            usuario.Correo = txtCorreo.Text;
+            usuario.Genero = cbGenero.Text;
+            usuario.IP = txtIP.Text;
+
+            if (usuario.Guardar())
+            {
+                btnActualizar01.Enabled = false;
+                btnEliminar03.Enabled = false;
+                txtID.Clear();
+                txtNombre.Clear();
+                txtApellidos.Clear();
+                txtCorreo.Clear();
+                txtCriterio.Clear();
+                cbColumna.Text = "";
+                cbGenero.Text = "";
+                txtIP.Clear();
+                dgvUsuarios.DataSource = Usuario.GetUsuarios();
+                MessageBox.Show("Usuario guardado");
+            }
+            else
+            {
+                MessageBox.Show("No se pudo guardar");
+            }
+        }
     }
 }
